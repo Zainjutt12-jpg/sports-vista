@@ -1,0 +1,1 @@
+export const secretKeyVendor = 'RIdeosBXNew@0(8';
