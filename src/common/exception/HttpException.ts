@@ -19,3 +19,15 @@ export default class HttpException extends HttpError {
         this.errorCode = errorCode || httpCode;
     }
 }
+
+export class NotFoundException extends HttpException {
+    constructor(detail: string, message = "Not Found") {
+        super(StatusCodes.NOT_FOUND, message, detail, StatusCodes.NOT_FOUND);
+    }
+}
+
+export class ConflictException extends HttpException {
+    constructor(detail: string, message = "Conflict") {
+        super(StatusCodes.CONFLICT, message, detail, StatusCodes.CONFLICT);
+    }
+}

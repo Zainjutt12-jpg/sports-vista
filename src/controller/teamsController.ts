@@ -1,16 +1,17 @@
-import Response from "../common/responce/Responce";
-import { jwtAuthMiddleware } from "../config/authiddleware";
-import { Body, Get, HttpCode, JsonController, Post,Put,Param, UseBefore } from "routing-controllers";
-import { OpenAPI } from "routing-controllers-openapi";
-import { StatusCodes } from "http-status-codes";
-import teamsService from "../service/teamsService";
-import teamPostDto, { teamPutDto }  from "../dto/request/teamsRequest";
-import teamsResponseDto from "../dto/responce/teamsResponse";
+import Response from '../common/responce/Responce';
+import { jwtAuthMiddleware } from '../config/authiddleware';
+import { Body, Get, HttpCode, JsonController, Post, Put, Param, UseBefore } from 'routing-controllers';
+import { OpenAPI } from 'routing-controllers-openapi';
+import { StatusCodes } from 'http-status-codes';
+import teamsService from '../service/teamsService';
+import teamPostDto, { teamPutDto } from '../dto/request/teamsRequest';
+import teamsResponseDto from '../dto/responce/teamsResponse';
 
 @JsonController('/teams')
-export default class TeamsController{
+export default class TeamsController {
 
     private teamsService: teamsService = new teamsService();
+
     @OpenAPI({
         description: 'Add Team',
         summary: 'Create a new team'
@@ -21,7 +22,6 @@ export default class TeamsController{
         return await this.teamsService.addTeam(request);
     }
 
-
     @OpenAPI({
         description: 'Update Teams',
         summary: 'Update a previous team'
@@ -29,11 +29,9 @@ export default class TeamsController{
     @HttpCode(StatusCodes.CREATED)
     @UseBefore(jwtAuthMiddleware)
     @Put('/update-team/:teamId')
-    async updateUser(@Param('teamId') teamId: number, @Body() updateTeamDto: teamPutDto) {
+    async updateUser(@Param('teamId') teamId: number, @Body({ validate: true }) updateTeamDto: teamPutDto) {
         return await this.teamsService.updateTeam(teamId, updateTeamDto);
     }
-
-
 
     @OpenAPI({
         description: 'Get Teams',
@@ -46,7 +44,6 @@ export default class TeamsController{
         return await this.teamsService.getTeams();
     }
 
-
     @OpenAPI({
         description: 'Get Teams by User ID',
         summary: 'Get teams associated with a specific user'
@@ -58,9 +55,6 @@ export default class TeamsController{
         return await this.teamsService.getTeamsByUserId(userId);
     }
 
-
-
-
     @OpenAPI({
         description: 'Get Teams by Team ID',
         summary: 'Get teams associated with a specific TEAMId'
@@ -71,13 +65,4 @@ export default class TeamsController{
     async letsGetTeamsByTeamId(@Param('teamId') teamId: number): Promise<Response<teamsResponseDto[]>> {
         return await this.teamsService.letsGetTeamsByTeamId(teamId);
     }
-
-
-
-
-
-
 }
-
-
-

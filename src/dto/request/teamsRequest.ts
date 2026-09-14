@@ -1,108 +1,64 @@
-import { IsNotEmpty, IsInt, IsEmail, MaxLength, IsArray, IsDateString, IsNumber, isNotEmpty, isNumber, IsString } from 'class-validator';
+import { ArrayMaxSize, ArrayMinSize, IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export default  class teamPostDto{
+export default class teamPostDto {
     @IsNotEmpty()
     @IsString()
-    teamName:string
-
-    @IsNotEmpty()
-    @IsString()
-    teamLogo:string
+    teamName: string;
 
     @IsNotEmpty()
     @IsString()
-    teamDesc:string
+    teamLogo: string;
 
     @IsNotEmpty()
     @IsString()
-    player1:string
+    teamDesc: string;
+
+    @IsArray()
+    @ArrayMinSize(1)
+    @ArrayMaxSize(15)
+    @IsString({ each: true })
+    @IsNotEmpty({ each: true })
+    players: string[];
 
     @IsNotEmpty()
     @IsString()
-    player2:string
-
-    @IsNotEmpty()
-    @IsString()
-    player3:string
-
-    @IsNotEmpty()
-    @IsString()
-    player4:string
-
-    @IsNotEmpty()
-    @IsString()
-    player5:string
-
-    @IsNotEmpty()
-    @IsString()
-    player6:string
-
-    @IsNotEmpty()
-    @IsString()
-    player7:string
-
-    @IsNotEmpty()
-    @IsString()
-    createdBy:string
+    createdBy: string;
 
     @IsNotEmpty()
     @IsNumber()
-    createdById:number
+    createdById: number;
 }
 
-
-export   class teamPutDto{
-
-    @IsNotEmpty()
+export class teamPutDto {
+    @IsOptional()
     @IsNumber()
-    teamId:number
+    teamId?: number;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
-    teamName:string
+    teamName?: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
-    teamLogo:string
+    teamLogo?: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
-    teamDesc:string
+    teamDesc?: string;
 
-    @IsNotEmpty()
+    @IsOptional()
+    @IsArray()
+    @ArrayMinSize(1)
+    @ArrayMaxSize(15)
+    @IsString({ each: true })
+    @IsNotEmpty({ each: true })
+    players?: string[];
+
+    @IsOptional()
     @IsString()
-    player1:string
+    createdBy?: string;
 
-    @IsNotEmpty()
-    @IsString()
-    player2:string
-
-    @IsNotEmpty()
-    @IsString()
-    player3:string
-
-    @IsNotEmpty()
-    @IsString()
-    player4:string
-
-    @IsNotEmpty()
-    @IsString()
-    player5:string
-
-    @IsNotEmpty()
-    @IsString()
-    player6:string
-
-    @IsNotEmpty()
-    @IsString()
-    player7:string
-
-    @IsNotEmpty()
-    @IsString()
-    createdBy:string
-
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
-    createdById:number
+    createdById?: number;
 }
-
